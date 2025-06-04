@@ -1,4 +1,4 @@
-package com.daya.notifications.notifications;
+package com.daya.symposium.notifications;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
