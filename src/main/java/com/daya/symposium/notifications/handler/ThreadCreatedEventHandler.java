@@ -28,12 +28,12 @@ public class ThreadCreatedEventHandler {
   
   @KafkaHandler
   public void handle(final ThreadCreatedEvent threadCreatedEvent) {
-    LOGGER.info("New event received: {}", threadCreatedEvent);
+    LOGGER.info("New event received: title={} id={}", threadCreatedEvent.getTitle(), threadCreatedEvent.getId());
 
     try {
       ResponseEntity<String> respo = restTemplate.exchange("http://localhost:8082", HttpMethod.GET, null, String.class);
       if (respo.getStatusCode().value() == HttpStatus.OK.value()) {
-        LOGGER.info("Got response from remote: {}", respo);
+        LOGGER.info("Got response from remote: {}", respo.getStatusCode());
       }
     } catch (ResourceAccessException rae) {
       LOGGER.error(rae.getMessage());
