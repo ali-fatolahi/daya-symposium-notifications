@@ -17,7 +17,7 @@ import com.daya.symposium.notifications.error.NonRetryableException;
 import com.daya.symposium.notifications.error.RetryableException;
 
 @Component
-  @KafkaListener(topics="daya-symposium-threads")
+@KafkaListener(topics="daya-symposium-threads")
 public class ThreadCreatedEventHandler {
   private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
   private RestTemplate restTemplate;
