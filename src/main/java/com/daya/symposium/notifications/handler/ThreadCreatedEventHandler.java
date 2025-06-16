@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
@@ -27,7 +30,10 @@ public class ThreadCreatedEventHandler {
   }
   
   @KafkaHandler
-  public void handle(final ThreadCreatedEvent threadCreatedEvent) {
+  public void handle(
+    @Payload final ThreadCreatedEvent threadCreatedEvent,
+    @Header("messageId") final String messageId,
+    @Header(KafkaHeaders.RECEIVED_KEY) final String messageKey) {
     LOGGER.info("New event received: title={} id={}", threadCreatedEvent.getTitle(), threadCreatedEvent.getId());
 
     try {
